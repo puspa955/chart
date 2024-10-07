@@ -1,7 +1,5 @@
-// components/BarChart.js
 import React from 'react';
 
-// Population data for South Asian countries
 const southAsianCountries = [
   { name: 'India', population: 1406631786 },
   { name: 'Pakistan', population: 233500636 },
@@ -22,11 +20,12 @@ const BarChart = () => {
       <div className="flex justify-center items-end h-100 bg-gray-200 p-16 rounded-lg border border-gray-400">
         {southAsianCountries.map((country) => (
           <div key={country.name} className="flex flex-col items-center" style={{ width: '80px' }}>
+            <p className="mb-1 text-sm text-center">{country.population.toLocaleString()}</p>
             <div
               className="bg-blue-500 w-16"
               style={{
                 height: `${(country.population / maxPopulation) * 320}px`,
-                minHeight: '5px',
+                minHeight: '2px',
               }}
             ></div>
             <p className="mt-2 text-sm text-center">{country.name}</p>
@@ -37,5 +36,7 @@ const BarChart = () => {
   );
 };
 
-
 export default BarChart;
+
+
+
