@@ -19,14 +19,14 @@ const BarChart = () => {
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-6 text-center">South Asian Countries Population</h2>
-      <div className="flex space-x-2 justify-center items-end h-100 bg-gray-200 p-4 rounded-lg border border-gray-400">
+      <div className="flex justify-center items-end h-100 bg-gray-200 p-16 rounded-lg border border-gray-400">
         {southAsianCountries.map((country) => (
-          <div key={country.name} className="flex flex-col items-center">
+          <div key={country.name} className="flex flex-col items-center" style={{ width: '80px' }}>
             <div
-              className="bg-blue-500 w-10"
+              className="bg-blue-500 w-16"
               style={{
-                height: `${(country.population / maxPopulation) * 320}px`, 
-                minHeight: '20px', 
+                height: `${(country.population / maxPopulation) * 320}px`,
+                minHeight: '20px',
               }}
             ></div>
             <p className="mt-2 text-sm text-center">{country.name}</p>
