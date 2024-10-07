@@ -26,7 +26,7 @@ const BarChart = () => {
               className="bg-blue-500 w-16"
               style={{
                 height: `${(country.population / maxPopulation) * 320}px`,
-                minHeight: '20px',
+                minHeight: '5px',
               }}
             ></div>
             <p className="mt-2 text-sm text-center">{country.name}</p>
