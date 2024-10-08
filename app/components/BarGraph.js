@@ -47,15 +47,12 @@ const BarChart = () => {
               return (
                 <div key={index} className="flex flex-col items-center">
                   <p className="text-xs text-gray-500">{formatNumber(data.population).toLocaleString()}</p> {/* Population with rounding */}
+
                   <div className="bg-blue-500 w-10" style={{ height: `${barHeight}px` }}></div>
+                  <p className="text-xs text-gray-500">{data.country}</p> {/* Country name below the bar */}
                 </div>
               );
             })}
-          </div>
-          <div className="flex space-x-4 mt-2">
-            {populations.map((data, index) => (
-              <p key={index} className="text-sm text-center">{data.country}</p>
-            ))}
           </div>
         </div>
       </div>
