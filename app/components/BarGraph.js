@@ -33,23 +33,23 @@ const BarChart = () => {
                 <p className="text-sm text-gray-700 text-right w-20">
                   {formatNumber(labelValue).toLocaleString()} {/* Y-axis labels */}
                 </p>
-                <div className="absolute left-[6rem] w-[558px] h-px bg-gray-300 mt-1"></div>
+                <div className="absolute left-[6rem] w-[608px] h-px bg-gray-300 mt-1"></div>
               </div>
             );
           })}
         </div>
 
         {/* Bar Chart */}
-        <div className="flex flex-col items-center">
-          <div className="flex space-x-4 items-end bg-gray-200">
+        <div className="flex flex-col items-center bg-gray-200">
+          <div className="flex items-end relative">
+            <div className="absolute left-0 w-full h-px bg-gray-300 bottom-0"></div>
             {populations.map((data, index) => {
               const barHeight = Math.max(data.population * barHeightMultiplier, minBarHeight); 
               return (
-                <div key={index} className="flex flex-col items-center">
-                  <p className="text-xs text-gray-500">{formatNumber(data.population).toLocaleString()}</p> {/* Population with rounding */}
-
+                <div key={index} className="flex flex-col items-center w-[60px] mx-2">
+                  <p className="text-xs text-gray-500">{formatNumber(data.population).toLocaleString()}</p>
                   <div className="bg-blue-500 w-10" style={{ height: `${barHeight}px` }}></div>
-                  <p className="text-xs text-gray-500">{data.country}</p> {/* Country name below the bar */}
+                  <p className="text-xs text-gray-500">{data.country}</p>
                 </div>
               );
             })}
