@@ -1,4 +1,3 @@
-// components/BarChart.js
 import React from "react";
 
 const populations = [
@@ -13,43 +12,45 @@ const populations = [
 ];
 
 const BarChart = () => {
-  const maxPopulation = Math.max(...populations.map((p) => p.population));
+  const maxPopulation = Math.max(...populations.map(p => p.population));
+  const barHeightMultiplier = 300 / maxPopulation;
+  const minBarHeight = 2; 
 
-  // Set the number of intervals for the y-axis
-  const intervals = 5;
-  const intervalStep = maxPopulation / intervals;
+  const formatNumber = (num) => {
+    return Math.round(num / 100) * 100;
+  };
 
   return (
     <div className="w-full p-4 flex flex-col items-center justify-center">
       <h1 className="text-center text-2xl font-bold mb-6">South Asian Countries Population</h1>
       <div className="flex">
-        {/* Y-Axis with intervals */}
-        <div className="flex flex-col justify-between h-[320px] pr-4">
-          {/* Reverse order to show 0 at the bottom and increase upwards */}
-          {[...Array(intervals + 1)].map((_, index) => (
-            <p key={index} className="text-sm text-gray-700 text-right">
-              {/* Intervals start at 0 and go upwards */}
-              {(intervalStep * (intervals - index)).toLocaleString()}
-            </p>
-          ))}
+        {/* Y-Axis */}
+        <div className="flex flex-col justify-between h-[320px] pr-4 relative mt-1">
+          {[...Array(11)].map((_, index) => {
+            const labelValue = Math.round(maxPopulation / 10 * (10 - index)); 
+            return (
+              <div key={index} className="flex items-center justify-end w-full">
+                <p className="text-sm text-gray-700 text-right w-20">
+                  {formatNumber(labelValue).toLocaleString()} {/* Y-axis labels */}
+                </p>
+                <div className="absolute left-[6rem] w-[558px] h-px bg-gray-300 mt-1"></div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Bar Chart */}
         <div className="flex flex-col items-center">
           <div className="flex space-x-4 items-end bg-gray-200">
-            {populations.map((data, index) => (
-              <div key={index} className="flex flex-col items-center">
-                {/* Bar */}
-                <p className="text-xs text-gray-500">{data.population.toLocaleString()}</p>
-
-                <div
-                  className="bg-blue-500 w-10"
-                  style={{
-                    height: `${(data.population / maxPopulation) * 300}px`, // Scale bars based on max population
-                  }}
-                ></div>
-              </div>
-            ))}
+            {populations.map((data, index) => {
+              const barHeight = Math.max(data.population * barHeightMultiplier, minBarHeight); 
+              return (
+                <div key={index} className="flex flex-col items-center">
+                  <p className="text-xs text-gray-500">{formatNumber(data.population).toLocaleString()}</p> {/* Population with rounding */}
+                  <div className="bg-blue-500 w-10" style={{ height: `${barHeight}px` }}></div>
+                </div>
+              );
+            })}
           </div>
           <div className="flex space-x-4 mt-2">
             {populations.map((data, index) => (
